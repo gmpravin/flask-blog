@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Blog Posts</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <!-- This is Blog posts  -->
+            {% for post in posts %}
+            <div style="border: 6px black solid;padding: 13px;" class="mb-3">
+                <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif">{{post.name}}</h5>
+                <img src="/static/uploads/{{post.image}}" height="200px" />
+                <div class="postbody">Posted At:{{post.createdAt}}</div>
+                <div class="postbody">Author : {{post.author}}</div>
+                <p class="postbody">{{post.postContent[0:200]}}...</p>
+                <div class="d-flex justify-content-end">
+                    <p><a class="postbody mr-1" href='posts/{{post.id}}'><strong>More</strong></a></p>
+                    <p><a class="postbody mr-1" href='post/edit/{{post.id}}'><strong>Edit</strong></a></p>
+                    <p><a class="postbody mr-1" href='post/delete/{{post.id}}'><strong>Delete</strong></a></p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- This is for Particular post views -->
+{% if post %}
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <center>
+<img src="/static/uploads/{{post.image}}" height="300px" width="80%" />
+            </center>
+            
+        </div>
+        <div class="col-md-6">
+            <div style="border: 6px black solid" class="mb-3 mr-2">
+                <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif">{{post.name}}</h5>
+                <div class="postbody">Posted At:{{post.createdAt}}</div>
+                <div class="postbody">Author : {{post.author}}</div>
+                <p class="postbody">{{post.postContent}}</p>
+                <div class="d-flex justify-content-end">
+                    <p><a class="postbody" href='/posts'>Back</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+</div>
+
+{% endblock %}
